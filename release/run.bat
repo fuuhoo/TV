@@ -1,16 +1,16 @@
-move .\leanbackJavaArm64_v8a\release\*.apk .\
-move .\leanbackJavaArmeabi_v7a\release\*.apk .\
-move .\leanbackPythonArm64_v8a\release\*.apk .\
-move .\leanbackPythonArmeabi_v7a\release\*.apk .\
-move .\mobileJavaArm64_v8a\release\*.apk .\
-move .\mobileJavaArmeabi_v7a\release\*.apk .\
-move .\mobilePythonArm64_v8a\release\*.apk .\
-move .\mobilePythonArmeabi_v7a\release\*.apk .\
-rmdir /s /q .\leanbackJavaArm64_v8a
-rmdir /s /q .\leanbackJavaArmeabi_v7a
-rmdir /s /q .\leanbackPythonArm64_v8a
-rmdir /s /q .\leanbackPythonArmeabi_v7a
-rmdir /s /q .\mobileJavaArm64_v8a
-rmdir /s /q .\mobileJavaArmeabi_v7a
-rmdir /s /q .\mobilePythonArm64_v8a
-rmdir /s /q .\mobilePythonArmeabi_v7a
+move ..\app\leanbackJavaArm64_v8a\release\*.apk .\
+move ..\app\leanbackJavaArmeabi_v7a\release\*.apk .\
+move ..\app\leanbackPythonArm64_v8a\release\*.apk .\
+move ..\app\leanbackPythonArmeabi_v7a\release\*.apk .\
+move ..\app\mobileJavaArm64_v8a\release\*.apk .\
+move ..\app\mobileJavaArmeabi_v7a\release\*.apk .\
+move ..\app\mobilePythonArm64_v8a\release\*.apk .\
+move ..\app\mobilePythonArmeabi_v7a\release\*.apk .\
+rmdir /s /q ..\app\leanbackJavaArm64_v8a
+rmdir /s /q ..\app\leanbackJavaArmeabi_v7a
+rmdir /s /q ..\app\leanbackPythonArm64_v8a
+rmdir /s /q ..\app\leanbackPythonArmeabi_v7a
+rmdir /s /q ..\app\mobileJavaArm64_v8a
+rmdir /s /q ..\app\mobileJavaArmeabi_v7a
+rmdir /s /q ..\app\mobilePythonArm64_v8a
+rmdir /s /q ..\app\mobilePythonArmeabi_v7a
