@@ -71,7 +71,8 @@ public class HomeActivity extends BaseActivity implements CustomTitleView.Listen
     @Override
     protected void initView() {
         mBinding.progressLayout.showProgress();
-        Updater.get().release().start();
+        //取消自动更新
+//        Updater.get().release().start();
         Server.get().start();
         setRecyclerView();
         setViewModel();
@@ -152,7 +153,12 @@ public class HomeActivity extends BaseActivity implements CustomTitleView.Listen
         this.result = Result.empty();
         int index = getRecommendIndex();
         String home = ApiConfig.get().getHome().getName();
-        mBinding.title.setText(home.isEmpty() ? ResUtil.getString(R.string.app_name) : home);
+        if (home.contains("微信") | home.contains("公众号") | home.contains("WX")) {
+            mBinding.title.setText("影视TV");
+        } else {
+            mBinding.title.setText(home.isEmpty() ? ResUtil.getString(R.string.app_name) : home);
+
+        }
         if (mAdapter.size() > index) mAdapter.removeItems(index, mAdapter.size() - index);
         if (ApiConfig.get().getHome().getKey().isEmpty()) return;
         mViewModel.homeContent();
@@ -187,9 +193,11 @@ public class HomeActivity extends BaseActivity implements CustomTitleView.Listen
         int historyIndex = getHistoryIndex();
         int recommendIndex = getRecommendIndex();
         boolean exist = recommendIndex - historyIndex == 2;
-        if (renew) mHistoryAdapter = new ArrayObjectAdapter(mHistoryPresenter = new HistoryPresenter(this));
+        if (renew)
+            mHistoryAdapter = new ArrayObjectAdapter(mHistoryPresenter = new HistoryPresenter(this));
         if ((items.isEmpty() && exist) || (renew && exist)) mAdapter.removeItems(historyIndex, 1);
-        if ((items.size() > 0 && !exist) || (renew && exist)) mAdapter.add(historyIndex, new ListRow(mHistoryAdapter));
+        if ((items.size() > 0 && !exist) || (renew && exist))
+            mAdapter.add(historyIndex, new ListRow(mHistoryAdapter));
         mHistoryAdapter.setItems(items, null);
     }
 
@@ -199,12 +207,14 @@ public class HomeActivity extends BaseActivity implements CustomTitleView.Listen
     }
 
     private int getHistoryIndex() {
-        for (int i = 0; i < mAdapter.size(); i++) if (mAdapter.get(i).equals(R.string.home_history)) return i + 1;
+        for (int i = 0; i < mAdapter.size(); i++)
+            if (mAdapter.get(i).equals(R.string.home_history)) return i + 1;
         return -1;
     }
 
     private int getRecommendIndex() {
-        for (int i = 0; i < mAdapter.size(); i++) if (mAdapter.get(i).equals(R.string.home_recommend)) return i + 1;
+        for (int i = 0; i < mAdapter.size(); i++)
+            if (mAdapter.get(i).equals(R.string.home_recommend)) return i + 1;
         return -1;
     }
 
