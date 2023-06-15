@@ -178,6 +178,7 @@ public class LiveActivity extends BaseActivity implements GroupPresenter.OnClick
     }
 
     private void setPlayerView() {
+        getIjk().setPlayer(mPlayers.getPlayer());
         mBinding.control.player.setText(mPlayers.getPlayerText());
         getExo().setVisibility(mPlayers.isExo() ? View.VISIBLE : View.GONE);
         getIjk().setVisibility(mPlayers.isIjk() ? View.VISIBLE : View.GONE);
@@ -262,7 +263,7 @@ public class LiveActivity extends BaseActivity implements GroupPresenter.OnClick
     private void setChannelActivated() {
         for (int i = 0; i < mChannelAdapter.size(); i++) ((Channel) mChannelAdapter.get(i)).setSelected(mChannel);
         notifyItemChanged(mBinding.channel, mChannelAdapter);
-        getUrl();
+        fetch();
     }
 
     private void onTrack(View view) {
@@ -309,14 +310,14 @@ public class LiveActivity extends BaseActivity implements GroupPresenter.OnClick
         mPlayers.togglePlayer();
         Prefers.putLivePlayer(mPlayers.getPlayer());
         setPlayerView();
-        getUrl();
+        fetch();
     }
 
     private void onDecode() {
         mPlayers.toggleDecode();
         mPlayers.set(getExo(), getIjk());
         setDecodeView();
-        getUrl();
+        fetch();
     }
 
     private void hideUI() {
@@ -491,10 +492,10 @@ public class LiveActivity extends BaseActivity implements GroupPresenter.OnClick
         });
     }
 
-    private void getUrl() {
+    private void fetch() {
         if (mChannel == null) return;
         LiveConfig.get().setKeep(mChannel);
-        mViewModel.getUrl(mChannel);
+        mViewModel.fetch(mChannel);
         showProgress();
     }
 
@@ -571,7 +572,7 @@ public class LiveActivity extends BaseActivity implements GroupPresenter.OnClick
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onErrorEvent(ErrorEvent event) {
         if (!event.isRetry() || mPlayers.addRetry() > 3) onError(event);
-        else getUrl();
+        else fetch();
     }
 
     private void onError(ErrorEvent event) {
@@ -611,14 +612,14 @@ public class LiveActivity extends BaseActivity implements GroupPresenter.OnClick
     private void prevLine() {
         mChannel.prevLine();
         showInfo();
-        getUrl();
+        fetch();
     }
 
     private void nextLine(boolean show) {
         mChannel.nextLine();
         if (show) showInfo();
         else setInfo();
-        getUrl();
+        fetch();
     }
 
     private void seekTo(int time) {
